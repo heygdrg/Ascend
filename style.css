@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ascend - Private Network</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: #f4f4f4;
+    font-family: "Playfair Display", serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 120px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 40px;
+    margin: 10px 0 20px 0;
+    font-weight: 400;
+}
+
+.lead {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+form {
+    margin-bottom: 50px;
+}
+
+input {
+    padding: 15px 20px;
+    width: 300px;
+    border: none;
+    background: #e9e9e9;
+    font-size: 18px;
+}
+
+button {
+    padding: 15px 30px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.footer {
+    font-size: 20px;
+    line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>ascend</h1>
+    <h2>Private Network</h2>
+
+    <p class="lead">
+        Contact us via this form to access the first part of our system.
+    </p>
+
+    <form id="form">
+        <input type="email" id="email" placeholder="Adresse e-mail" required>
+        <button type="submit">Sign up</button>
+    </form>
+
+    <p class="footer">
+        Something is shifting. Not louder. Smarter. Ascend is a new way to understand the FX market - from analysis to execution.
+        A different lens. A quieter edge. This isn’t for everyone. Private release. Limited circle.
+    </p>
+</div>
+
+<script>
+const WEBHOOK_URL = "COLLE_TON_WEBHOOK_ICI";
+
+document.getElementById("form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+
+    const payload = {
+        content: "Nouvelle inscription : " + email
+    };
+
+    try {
+        await fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        alert("Envoyé !");
+        document.getElementById("form").reset();
+
+    } catch (error) {
+        alert("Erreur d'envoi (CORS possible)");
+    }
+});
+</script>
+
+</body>
+</html>
