@@ -43,21 +43,22 @@
 
 <body>
   <main class="container">
-    <h1>ascend</h1>
+    <h1>Ascend</h1>
     <h2>Private Network</h2>
 
-    <p class="lead">Contact us via this form to access the first part of our system.</p>
+    <p class="lead">Contact us via this form to access Ascend's Network </p>
 
     <form id="form">
-      <input type="email" name="email" id="email" placeholder="Adresse e-mail" autocomplete="email" required>
-      <button type="submit">Sign up</button>
+      <input type="email" name="email" id="email" placeholder="E-mail adress" autocomplete="email" required>
+      <button type="submit">Request access</button>
     </form>
 
     <p class="status" id="status" aria-live="polite"></p>
 
     <p class="footer">
+      The FX market is loud. This isn’t. 
+      Private research. Distributed selectively.
       Something is shifting. Not louder. Smarter. Ascend is a new way to understand the FX market — from analysis to execution.
-      A different lens. A quieter edge. This isn’t for everyone. Private release. Limited circle.
     </p>
   </main>
 
@@ -83,9 +84,9 @@
         if (!res.ok || !data.ok) throw new Error(data.error || "Erreur");
 
         form.reset();
-        statusEl.textContent = "Merci. Votre demande a été envoyée.";
+        statusEl.textContent = "Your request have been submitted, you will be contacted soon";
       } catch (err) {
-        statusEl.textContent = "Erreur d’envoi. Vérifie la config Vercel (WEBHOOK_URL).";
+        statusEl.textContent = "Erreur d’envoi.";
       }
     });
   </script>
