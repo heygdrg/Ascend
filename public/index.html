@@ -3,41 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ascend - Private Network</title>
+  <title>Ascend - Private Network</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#f4f4f4; --text:#0b0b0b; --muted:#2a2a2a; --input:#e9e9e9;
+      --text:#0b0b0b;
+      --muted:#444;
+      --input:#f2f2f2;
     }
-    *{ box-sizing:border-box; }
+
+    *{
+      box-sizing:border-box;
+    }
+
     body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family:"Playfair Display", serif;
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      margin:0;
+      font-family:"Inter", sans-serif;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       text-align:center;
+      color:var(--text);
+
+      /* Image marbre avec overlay blanc léger */
+      background:
+        linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)),
+        url("./background.jpg") center/cover no-repeat;
+
+      background-attachment:fixed;
     }
-    .container{ width:min(1100px, 92vw); padding:56px 16px; }
-    h1{ margin:0; font-weight:600; font-size: clamp(72px, 10vw, 150px); line-height:1; }
-    h2{ margin:14px 0 0; font-weight:400; font-size: clamp(26px, 3.4vw, 52px); line-height:1.15; }
-    .lead{ margin:18px 0 0; font-size:18px; color:var(--muted); }
-    form{ margin:48px 0 0; display:flex; gap:18px; justify-content:center; align-items:center; flex-wrap:wrap; }
+
+    .container{
+      width:min(1100px, 92vw);
+      padding:60px 20px;
+    }
+
+    h1{
+      margin:0;
+      font-family:"Playfair Display", serif;
+      font-weight:600;
+      font-size:clamp(70px, 10vw, 140px);
+      letter-spacing:-2px;
+    }
+
+    h2{
+      margin:14px 0 0;
+      font-family:"Playfair Display", serif;
+      font-weight:400;
+      font-size:clamp(24px, 3vw, 44px);
+    }
+
+    .lead{
+      margin:28px 0 0;
+      font-size:16px;
+      font-weight:300;
+      color:var(--muted);
+    }
+
+    form{
+      margin:60px 0 0;
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
     input{
-      width:min(420px, 70vw); height:60px; border:0; outline:none;
-      padding:0 22px; background:var(--input); font-size:20px; border-radius:4px;
+      width:min(420px, 75vw);
+      height:58px;
+      border:1px solid #ddd;
+      outline:none;
+      padding:0 20px;
+      background:var(--input);
+      font-size:15px;
+      border-radius:4px;
+      transition:0.2s ease;
     }
+
+    input:focus{
+      background:#fff;
+      border-color:#000;
+    }
+
     button{
-      height:60px; padding:0 34px; border:0; border-radius:999px;
-      background:#000; color:#fff; font-size:20px; cursor:pointer;
+      height:58px;
+      padding:0 34px;
+      border:0;
+      border-radius:999px;
+      background:#000;
+      color:#fff;
+      font-size:14px;
+      font-weight:500;
+      letter-spacing:0.5px;
+      cursor:pointer;
+      transition:0.25s ease;
     }
-    .status{ margin:16px 0 0; min-height:22px; font-size:16px; color:var(--muted); }
+
+    button:hover{
+      background:#222;
+    }
+
+    .status{
+      margin:18px 0 0;
+      min-height:22px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
     .footer{
-      margin:70px auto 0; max-width:1200px;
-      font-size:20px; line-height:1.6; color:var(--text);
+      margin:80px auto 0;
+      max-width:800px;
+      font-size:18px;
+      line-height:1.7;
+      font-family:"Playfair Display", serif;
+      color:#111;
     }
+
   </style>
 </head>
 
@@ -46,19 +133,20 @@
     <h1>Ascend</h1>
     <h2>Private Network</h2>
 
-    <p class="lead">Contact us via this form to access Ascend's Network </p>
+    <p class="lead">Contact us via this form to access Ascend's Network</p>
 
     <form id="form">
-      <input type="email" name="email" id="email" placeholder="E-mail adress" autocomplete="email" required>
-      <button type="submit">Request access</button>
+      <input type="email" name="email" id="email" placeholder="E-mail address" autocomplete="email" required>
+      <button type="submit">Request Access</button>
     </form>
 
     <p class="status" id="status" aria-live="polite"></p>
 
     <p class="footer">
-      The FX market is loud. This isn’t. 
-      Private research. Distributed selectively.
-      Something is shifting. Not louder. Smarter. Ascend is a new way to understand the FX market — from analysis to execution.
+      The FX market is loud. This isn’t.<br>
+      Private research. Distributed selectively.<br>
+      Something is shifting. Not louder. Smarter.<br>
+      Ascend is a new way to understand the FX market — from analysis to execution.
     </p>
   </main>
 
@@ -84,9 +172,9 @@
         if (!res.ok || !data.ok) throw new Error(data.error || "Erreur");
 
         form.reset();
-        statusEl.textContent = "Your request have been submitted, you will be contacted soon";
+        statusEl.textContent = "Your request has been submitted. You will be contacted soon.";
       } catch (err) {
-        statusEl.textContent = "Erreur d’envoi.";
+        statusEl.textContent = "Submission error.";
       }
     });
   </script>
