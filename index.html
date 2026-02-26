@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ascend - Private Network</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f4f4f4; --text:#0b0b0b; --muted:#2a2a2a; --input:#e9e9e9;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:"Playfair Display", serif;
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      text-align:center;
+    }
+    .container{ width:min(1100px, 92vw); padding:56px 16px; }
+    h1{ margin:0; font-weight:600; font-size: clamp(72px, 10vw, 150px); line-height:1; }
+    h2{ margin:14px 0 0; font-weight:400; font-size: clamp(26px, 3.4vw, 52px); line-height:1.15; }
+    .lead{ margin:18px 0 0; font-size:18px; color:var(--muted); }
+    form{ margin:48px 0 0; display:flex; gap:18px; justify-content:center; align-items:center; flex-wrap:wrap; }
+    input{
+      width:min(420px, 70vw); height:60px; border:0; outline:none;
+      padding:0 22px; background:var(--input); font-size:20px; border-radius:4px;
+    }
+    button{
+      height:60px; padding:0 34px; border:0; border-radius:999px;
+      background:#000; color:#fff; font-size:20px; cursor:pointer;
+    }
+    .status{ margin:16px 0 0; min-height:22px; font-size:16px; color:var(--muted); }
+    .footer{
+      margin:70px auto 0; max-width:1200px;
+      font-size:20px; line-height:1.6; color:var(--text);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>ascend</h1>
+    <h2>Private Network</h2>
+
+    <p class="lead">Contact us via this form to access the first part of our system.</p>
+
+    <form id="form">
+      <input type="email" name="email" id="email" placeholder="Adresse e-mail" autocomplete="email" required>
+      <button type="submit">Sign up</button>
+    </form>
+
+    <p class="status" id="status" aria-live="polite"></p>
+
+    <p class="footer">
+      Something is shifting. Not louder. Smarter. Ascend is a new way to understand the FX market — from analysis to execution.
+      A different lens. A quieter edge. This isn’t for everyone. Private release. Limited circle.
+    </p>
+  </main>
+
+  <script>
+    const form = document.getElementById("form");
+    const statusEl = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "";
+
+      const email = document.getElementById("email").value.trim();
+      if (!email) return;
+
+      try {
+        const res = await fetch("/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) throw new Error(data.error || "Erreur");
+
+        form.reset();
+        statusEl.textContent = "Merci. Votre demande a été envoyée.";
+      } catch (err) {
+        statusEl.textContent = "Erreur d’envoi. Vérifie la config Vercel (WEBHOOK_URL).";
+      }
+    });
+  </script>
+</body>
+</html>
